@@ -1,4 +1,6 @@
 command=input("Enter a number (or press Enter to quit): ")
+smallest=""
+largest=""
 if command!="":
     num=float(command)
     smallest=num
