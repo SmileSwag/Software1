@@ -25,6 +25,14 @@ I completed exercises 1, 2, 3 and 4.
 
 I completed exercises 1, 2, 3, 4, 5 and 6.
 
+##Module 8
+
+I completed exercises 1, 2, 3.
+
+##Module 9
+
+I completed exercises 1, 2, 3 and 4.
+
 ##Project
 
 I completed assignments 1 and 2.
