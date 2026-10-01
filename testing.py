@@ -1,53 +1,48 @@
-class Elevator:
-    def __init__(self, bottom, top):
-        self.bottom_floor = bottom
-        self.top_floor = top
-        self.current_floor = bottom
-    def go_to_floor(self, floor):
-        if floor < self.bottom_floor or floor > self.top_floor:
-            print("Invalid floor")
+class Cat:
+    def __init__(self, name):
+        self.name=name
+        
+class CatCafe(Cat):
 
-        while self.current_floor < floor:
-                self.floor_up()
+    def __init__(self):
+        self.cats=[]
+    def add_cat(self,cat):
+        self.cats.append(cat)
+    def list_cats(self):
+        for i in self.cats:
+            print(i)
+cafe = CatCafe()
+cafe.add_cat(Cat("Veikko"))
+cafe.add_cat(Cat("Vito"))
 
-        while self.current_floor > floor:
-                self.floor_down()
-    def floor_up(self):
-        if self.current_floor < self.top_floor:
-            self.current_floor += 1
-            print(f"Elevator is now on floor {self.current_floor}")
+print(cafe.cats[0].name)
+print(cafe.cats[1].name)
 
 
-    def floor_down(self):
-        if self.current_floor > self.bottom_floor:
-            self.current_floor -= 1
-            print(f"Elevator is now on floor {self.current_floor}")
 
-class Building(Elevator):
-    def __init__(self, bottom, top, num_elevators):
-        self.elevators = []
-        Elevator.__init__(self, bottom, top)
-        for i in range(num_elevators):
-            self.elevators.append(Elevator(bottom, top))
+class Engine:
+    def __init__(self, horsepower, engine_type="Fuel"):
+        self.horsepower=horsepower
+        self.engine_type=engine_type
+class Vehicle(Engine):
+    def __init__(self, make, model,year,engine):
+        self.make=make
+        self.model=model
+        self.year=year
+        self.engine=engine
 
-    def run_elevator(self, elevator_num, destination_floor):
-        if 0 <= elevator_num < len(self.elevators):
-            print(f"Running elevator {elevator_num} to floor {destination_floor}")
-            self.elevators[elevator_num].go_to_floor(destination_floor)
-        else:
-            print("Invalid elevator num")
+    def start(self):
+        print(f"{self.make} {self.model} ({self.year}) with {self.engine.engine_type} engine is starting.")
+    def stop(self):
+        print(f"{self.make} {self.model} ({self.year}) with {self.engine.engine_type} engine is stopping.")
+engine1= Engine(123)
 
-# Test Building with multiple elevators
-building = Building(1, 10, 3)
-building.run_elevator(0, 5)
-building.run_elevator(1, 3)
-building.run_elevator(2, 8)
+engine2= Engine(400,"Hybrid")
+car1= Vehicle("VW", "Pascal", 2013 , engine1)
+car2= Vehicle("Volvo", "XC19", 2022 , engine2)
+car1.start()
+car1.stop()
+car2.start()
+car2.stop()
 
-# Test single elevator building
-small_building = Building(0, 5, 1)
-small_building.run_elevator(0, 4)
 
-# Test larger building
-office = Building(1, 6, 5)
-office.run_elevator(0, 4)
-office.run_elevator(4, 2)
