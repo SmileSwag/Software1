@@ -33,6 +33,10 @@ I completed exercises 1, 2, 3.
 
 I completed exercises 1, 2, 3 and 4.
 
+##Module 10
+
+I completed exercises 1, 2, 3 and 4.
+
 ##Project
 
-I completed assignments 1 and 2.
+I completed assignments 1, 2 and 3.
