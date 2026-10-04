@@ -3,4 +3,4 @@
 
 ##Project
 
-I completed assignments 1 and 2.
+I completed assignments 1, 2, 3, 4 and 5.
