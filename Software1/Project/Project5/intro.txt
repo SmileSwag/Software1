@@ -1,0 +1,12 @@
+================================================================
+                   GOLD RUSH GRID: MARATHON
+================================================================
+Hello adventurer,
+
+You are an adventurer exploring a treacherous 5x5 wasteland. 
+A chest of shiny GOLD (+3 pts) is buried somewhere in the grid,
+along with hidden LANDMINES (-1 pt). 
+
+Equipped with your trusty Metal Detector and Gold Radar, you must
+navigate the field before your battery runs out!
+================================================================

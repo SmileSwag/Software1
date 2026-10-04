@@ -1,0 +1,21 @@
+================================================================
+                         HOW TO PLAY
+================================================================
+1. GAMEPLAY & SCORE:
+   • You have 100 moves total.
+   • Step on Gold: +3 Points (Respawns at a new spot!)
+   • Step on Mine: -1 Point  (Respawns at a new spot!)
+
+2. CONTROLS:
+   Use WASD keys to move across the 5x5 grid:
+   [W] Up | [S] Down | [A] Left | [D] Right | [M] Menu
+
+3. DIFFICULTY MODES:
+   • [1] Easy:   1 Mine  | 1 Gold
+   • [2] Medium: 2 Mines | 1 Gold
+   • [3] Hard:   3 Mines | 1 Gold
+
+4. DETECTION EQUIPMENT:
+   • Metal Detector: Warns [MINE NEARBY!] if a mine is within 3x3.
+   • Gold Radar: Reports [WARMER] or [COLDER] based on distance.
+================================================================
