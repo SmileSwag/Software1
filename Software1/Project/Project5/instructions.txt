@@ -12,8 +12,8 @@
 
 3. DIFFICULTY MODES:
    • [1] Easy:   1 Mine  | 1 Gold
-   • [2] Medium: 2 Mines | 1 Gold
-   • [3] Hard:   3 Mines | 1 Gold
+   • [2] Hard: 2 Mines | 1 Gold
+   • [3] Impossible:   3 Mines | 1 Gold
 
 4. DETECTION EQUIPMENT:
    • Metal Detector: Warns [MINE NEARBY!] if a mine is within 3x3.

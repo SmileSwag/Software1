@@ -1,3 +1,4 @@
+from fileinput import filename
 import random
 import json
 import os
@@ -150,13 +151,9 @@ class Grid:
 
             if item.item_type == "Mine":
 
-                row_diff = abs(
-                    player_pos[0] - item.position[0]
-                )
+                row_diff = abs(player_pos[0] - item.position[0])
 
-                col_diff = abs(
-                    player_pos[1] - item.position[1]
-                )
+                col_diff = abs(player_pos[1] - item.position[1])
 
                 if row_diff <= 1 and col_diff <= 1:
                     return True
@@ -175,26 +172,18 @@ class Grid:
     def relocate_item(self, item: Item, player_pos: list):
 
         # Remove item from old room
-        self.get_room_by_pos(
-            item.position
-        ).item = None
-
+        self.get_room_by_pos(item.position).item = None
         occupied = [player_pos]
 
         for other_item in self.items:
-
             if other_item != item:
                 occupied.append(other_item.position)
 
         # Generate new position
-        item.position = self.get_random_empty_pos(
-            occupied
-        )
+        item.position = self.get_random_empty_pos(occupied)
 
         # Add item to new room
-        self.get_room_by_pos(
-            item.position
-        ).item = item
+        self.get_room_by_pos(item.position).item = item
 
 
 def calculate_distance(pos1: list, pos2: list) -> int:
@@ -265,14 +254,9 @@ def setup_new_game():
         random.randint(0, grid_size - 1)
     ]
 
-    grid.setup_items(
-        num_mines,
-        player.position
-    )
+    grid.setup_items(num_mines,player.position)
 
-    starting_room = grid.get_room_by_pos(
-        player.position
-    )
+    starting_room = grid.get_room_by_pos(player.position)
 
     print("\nGame created!")
     print(f"Difficulty: {difficulty_mode}")
@@ -304,18 +288,8 @@ def save_game():
 
     try:
 
-        with open(
-            SAVE_FILE,
-            "w",
-            encoding="utf-8"
-        ) as f:
-
-            json.dump(
-                save_data,
-                f,
-                indent=4
-            )
-
+        with open(SAVE_FILE,"w",encoding="utf-8") as f:
+            json.dump(save_data,f,indent=4)
         print("\nGame saved successfully!")
 
     except Exception as e:
@@ -332,28 +306,20 @@ def load_game() -> bool:
         return False
 
     try:
-
-        with open(
-            SAVE_FILE,
-            "r",
-            encoding="utf-8"
-        ) as f:
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        file_path = os.path.join(base_dir, SAVE_FILE)
+        with open(file_path,"r",encoding="utf-8") as f:
 
             data = json.load(f)
 
-        player = Player(
-            name=data["name"],
-            age=data["age"]
-        )
+        player = Player(name=data["name"],age=data["age"])
 
         player.moves_left = data["moves_left"]
         player.gold_count = data["gold_count"]
         player.mine_count = data["mine_count"]
         player.position = data["player_pos"]
 
-        grid = Grid(
-            size=data["grid_size"]
-        )
+        grid = Grid(size=data["grid_size"])
 
         grid.items = [
             Item.from_dict(item_dict)
@@ -363,25 +329,16 @@ def load_game() -> bool:
         # Reconnect items to rooms
         for item in grid.items:
 
-            grid.get_room_by_pos(
-                item.position
-            ).item = item
+            grid.get_room_by_pos(item.position).item = item
 
         difficulty_mode = data["difficulty_mode"]
 
-        print(
-            f"\nSave loaded! "
-            f"Welcome back, {player.name}!"
-        )
-
+        print(f"\nSave loaded! \nWelcome back, {player.name}!")
         return True
 
     except Exception as e:
 
-        print(
-            f"\nFailed to load save file: {e}"
-        )
-
+        print(f"\nFailed to load save file: {e}")
         return False
 
 
@@ -397,21 +354,15 @@ def play_grid_game():
     if grid is None or not grid.items:
         setup_new_game()
 
-    prev_distance = calculate_distance(
-        player.position,
-        grid.get_gold_position()
-    )
+    prev_distance = calculate_distance(player.position,grid.get_gold_position())
 
     while player.moves_left > 0 and not player.get_score() < 0:
 
         grid.display(player.position)
-
         current_room = grid.get_room_by_pos(player.position)
 
-        print(
-            f"\nLocation: Room "
-            f"{current_room.name}"
-        )
+        print(f"\nLocation: Room "
+            f"{current_room.name}")
 
         # Mine detector
         if grid.is_mine_nearby(player.position):
@@ -425,10 +376,7 @@ def play_grid_game():
         # Gold radar
         gold_pos = grid.get_gold_position()
 
-        current_distance = calculate_distance(
-            player.position,
-            gold_pos
-        )
+        current_distance = calculate_distance(player.position,gold_pos)
 
         if current_distance < prev_distance:
             print("GOLD RADAR: WARMER! (Getting closer)")
@@ -445,11 +393,7 @@ def play_grid_game():
         print(f"Mines Hit: {player.mine_count}")
         print(f"Score: {player.get_score()}")
 
-        cmd = input(
-            "\nEnter move "
-            "(W/A/S/D) "
-            "or [M] for Menu: "
-        ).strip().lower()
+        cmd = input("\nEnter move (W/A/S/D) or [M] for Menu: ").strip().lower()
 
         if cmd == "m":
             break
@@ -459,9 +403,7 @@ def play_grid_game():
             continue
 
         # Check new room
-        new_room = grid.get_room_by_pos(
-            player.position
-        )
+        new_room = grid.get_room_by_pos(player.position)
 
         if new_room.item is not None:
             item = new_room.item
