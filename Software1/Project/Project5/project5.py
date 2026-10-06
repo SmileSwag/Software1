@@ -1,18 +1,17 @@
+from fileinput import filename
 import sys
 import os
 import game
 
 
+
+
 def read_file(filename: str):
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    file_path = os.path.join(base_dir, filename)
 
-    if os.path.exists(filename):
-
-        with open(
-            filename,
-            "r",
-            encoding="utf-8"
-        ) as f:
-
+    if os.path.exists(file_path):
+        with open(file_path,"r",encoding="utf-8") as f:
             print(f.read())
 
     else:
@@ -90,9 +89,7 @@ def main_menu():
 
         elif command == "2":
 
-            read_file(
-                "instructions.txt"
-            )
+            read_file("instructions.txt")
 
         elif command == "3":
 

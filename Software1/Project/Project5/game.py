@@ -116,16 +116,9 @@ class Grid:
         for _ in range(num_mines):
             mine_pos = self.get_random_empty_pos(occupied)
 
-            mine_item = Item(
-                "Mine",
-                -1,
-                mine_pos
-            )
-
+            mine_item = Item("Mine", -1, mine_pos)
             self.items.append(mine_item)
-
             self.get_room_by_pos(mine_pos).item = mine_item
-
             occupied.append(mine_pos)
 
     def display(self, player_pos: list):
@@ -213,13 +206,10 @@ def calculate_distance(pos1: list, pos2: list) -> int:
 
 
 def setup_new_game():
-    if os.path.exists("intro.txt"):
-        with open(
-            "intro.txt",
-            "r",
-            encoding="utf-8"
-        ) as f:
-
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    file_path = os.path.join(base_dir, "intro.txt")
+    if os.path.exists(file_path):
+        with open(file_path,"r",encoding="utf-8") as f:
             print(f.read())
 
     else:
