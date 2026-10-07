@@ -3,13 +3,13 @@ import random
 import json
 import os
 
-SAVE_FILE = "save_game.json"
+SAVE_FILE = r"c:\Metropolia\Software1\Software1\Project\Project5\save_game.json"
 player = None
 grid = None
 difficulty_mode = ""
 
 class Item:
-    def __init__(self, item_type: str, points: int, position: list):
+    def __init__(self, item_type="", points=0, position=None):
         self.item_type = item_type
         self.points = points
         self.position = position
@@ -21,12 +21,11 @@ class Item:
             "position": self.position
         }
 
-    def from_dict(cls, data):
-        return cls(
-            data["item_type"],
-            data["points"],
-            data["position"]
-        )
+    def from_dict(self, data):
+        self.item_type = data["item_type"]
+        self.points = data["points"]
+        self.position = data["position"]
+        return self
 
 
 class Room:
@@ -306,9 +305,9 @@ def load_game() -> bool:
         return False
 
     try:
-        base_dir = os.path.dirname(os.path.abspath(__file__))
-        file_path = os.path.join(base_dir, SAVE_FILE)
-        with open(file_path,"r",encoding="utf-8") as f:
+        # base_dir = os.path.dirname(os.path.abspath(__file__))
+        # file_path = os.path.join(base_dir, SAVE_FILE)
+        with open(SAVE_FILE,"r",encoding="utf-8") as f:
 
             data = json.load(f)
 
@@ -321,17 +320,18 @@ def load_game() -> bool:
 
         grid = Grid(size=data["grid_size"])
 
-        grid.items = [
-            Item.from_dict(item_dict)
-            for item_dict in data["items"]
-        ]
-
+        grid.items = []
+        for item_data in data["items"]:
+            item = Item()
+            item.from_dict(item_data)
+            grid.items.append(item)
         # Reconnect items to rooms
         for item in grid.items:
 
             grid.get_room_by_pos(item.position).item = item
 
         difficulty_mode = data["difficulty_mode"]
+        
 
         print(f"\nSave loaded! \nWelcome back, {player.name}!")
         return True

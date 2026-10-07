@@ -94,10 +94,17 @@ def main():
     ):
 
         choice = input("Found a saved game! Do you want to continue? (y/n): ").strip().lower()
+        while choice != "y" and choice != "n":
+            print("Invalid option. Please choose (y/n).")
+            choice = input("Do you want to continue? (y/n): ").strip().lower()
         if choice == "y":
             if game.load_game():
                 main_menu()
                 return
+        elif choice == "n":
+            main_menu()
+            return
+                        
 
     # New player
     while True:
