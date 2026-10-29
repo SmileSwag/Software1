@@ -1,0 +1,32 @@
+html{
+    font-size: 16px;
+}
+
+body{
+    margin: 0;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding: 0 5rem;
+    background-color: beige;
+}
+
+img{
+    max-width: 100%;
+}
+
+header img{
+    width: 50px;
+}
+
+header nav{
+    display: flex;
+    justify-content:  space-between;
+}
+
+div{
+    align-items: right;
+}
+
+h1{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    
+}
