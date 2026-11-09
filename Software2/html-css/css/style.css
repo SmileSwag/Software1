@@ -58,6 +58,10 @@ main img{
     background-color: lightgoldenrodyellow;
     border-radius: 6px;
     padding: 20px;
+
+img{
+    max-width:fit-content;
+}
 }
 i{
     font-size: 30px;
